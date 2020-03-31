@@ -7,13 +7,13 @@ def usage():
     print("""\
 Usage: dsv2sav.py INPUT OUTPUT
 
-Convert DSV (DeSmuME save file) to SAV (raw save file) and vice versa.
+Convert DSV (DeSmuME save file) to SAV/SRM (raw save file) and vice versa.
 
 INPUT and OUTPUT must have appropriate file extensions.
 
 If OUTPUT is a DSV file, then it must already exist and contain DSV data from
 the correct NDS game. Its contents will be overwritten with the data from the
-SAV file.
+SAV/SRM file.
 """, file=sys.stderr)
     exit(2)
 
@@ -54,15 +54,17 @@ def sav_to_dsv(sav_file, dsv_file):
         dsv.write(sav_data)
 
 
+VALID_EXTENSIONS = ('dsv', 'sav', 'srm')
+
 def main():
     args = sys.argv[1:]
     if len(args) != 2:
         usage()
     in_file, out_file = args
     in_ext, out_ext = map(get_extension, args)
-    if in_ext not in ('dsv', 'sav') or out_ext not in ('dsv', 'sav'):
+    if in_ext not in VALID_EXTENSIONS or out_ext not in VALID_EXTENSIONS:
         usage()
-    if in_ext == out_ext:
+    if (in_ext == 'dsv') == (out_ext == 'dsv'):
         # Input and output cannot be the same type
         usage()
     if in_ext == 'dsv':
