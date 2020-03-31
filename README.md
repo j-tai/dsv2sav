@@ -12,7 +12,8 @@ Convert DSV (DeSmuME save file) to SAV (raw save file) and vice versa.
 INPUT and OUTPUT must have appropriate file extensions.
 
 If OUTPUT is a DSV file, then it must already exist and contain DSV data from
-the correct NDS game.
+the correct NDS game. Its contents will be overwritten with the data from the
+SAV file.
 ```
 
 ## License
